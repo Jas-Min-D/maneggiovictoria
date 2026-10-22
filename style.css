@@ -434,3 +434,6 @@ a.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px color-mix(in okla
 @media (max-width:900px){.contact-list.cols{grid-template-columns:1fr}}
 @media (max-width:700px){.route{grid-template-columns:1fr}.route figure:first-child img{height:auto;aspect-ratio:16/10}.route figure:last-child img{height:auto;aspect-ratio:4/5;max-height:520px}}
 .contact .who{font-size:.95rem;color:var(--ink-soft);margin-top:4px}
+.src-note{margin:-4px 0 12px;color:var(--ink-soft);font-size:.95rem}
+.ch-src{display:flex;flex-wrap:wrap;gap:8px}
+.ch-src .choice label{padding:9px 14px;border-radius:999px;font-weight:600;font-size:.95rem}

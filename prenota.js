@@ -8,6 +8,7 @@ var LEVELS=[
   {id:"carrozza",name:"Carrozza",sub:"Giro in carrozza, per chi non monta"}
 ];
 var DURS=[60,90,120,180];
+var SOURCES=["Google","Instagram","Facebook","Amici o passaparola","B&B o struttura in zona","Altro"];
 var PRICES={60:25,90:35,120:45,180:60}; // euro a persona, uguali per tutte le esperienze
 var fmt=function(m){return (m%60?Math.floor(m/60)+"."+String(m%60).padStart(2,"0"):m/60)+" h"};
 var WD=["Dom","Lun","Mar","Mer","Gio","Ven","Sab"];
@@ -15,7 +16,7 @@ var MONTHS=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","ag
 var $=function(id){return document.getElementById(id)};
 var days=[];(function(){var t=new Date();t.setHours(12,0,0,0);for(var i=1;i<=14;i++){var d=new Date(t);d.setDate(t.getDate()+i);days.push(d)}})();
 var key=function(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
-var state={level:(LEVELS.some(function(l){return "#"+l.id===location.hash})?location.hash.slice(1):"principiante"),dur:60,day:key(days[0]),slot:null};
+var state={level:(LEVELS.some(function(l){return "#"+l.id===location.hash})?location.hash.slice(1):"principiante"),dur:60,day:key(days[0]),slot:null,src:null};
 
 function radio(group,value,checked,inner,disabled){
   var id=(group+"-"+value).replace(/[^\w-]/g,"");
@@ -24,6 +25,7 @@ function radio(group,value,checked,inner,disabled){
 function renderStatic(){
   $("levels").innerHTML=LEVELS.map(function(l){return radio("level",l.id,l.id===state.level,'<span class="c-name">'+l.name+'</span><span class="c-sub">'+l.sub+'</span>')}).join("");
   $("durs").innerHTML=DURS.map(function(d){return radio("dur",d,d===state.dur,'<span class="c-big">'+fmt(d).replace(" h",'<span class="unit"> h</span>')+'</span><span class="c-sub">'+PRICES[d]+' € a persona</span>')}).join("");
+  $("srcs").innerHTML=SOURCES.map(function(x,i){return radio("src",x,false,x).replace('id="src-','id="src'+i+'-').replace('for="src-','for="src'+i+'-')}).join("");
   $("days").innerHTML=days.map(function(d){return radio("day",key(d),key(d)===state.day,'<span class="d-w">'+WD[d.getDay()]+'</span><span class="d-n">'+d.getDate()+'</span>')}).join("");
 }
 function renderSlots(){
@@ -49,11 +51,11 @@ function summary(){
   var dayTxt=WD[d.getDay()]+" "+d.getDate()+" "+MONTHS[d.getMonth()];
   var name=$("fName").value.trim(),ppl=people();
   var row=function(k,v){return "<dt>"+k+"</dt><dd>"+(v?String(v).replace(/</g,"&lt;"):'<span class="empty">da inserire</span>')+"</dd>"};
-  $("sum").innerHTML=row("Nome",name)+row("Persone",ppl)+row(lv.id==="carrozza"?"Esperienza":"Livello",lv.name)+row("Durata",fmt(state.dur))+row("Giorno",dayTxt)+row("Orario",state.slot)+row("Totale",tot(ppl));
+  $("sum").innerHTML=row("Nome",name)+row("Persone",ppl)+row(lv.id==="carrozza"?"Esperienza":"Livello",lv.name)+row("Durata",fmt(state.dur))+row("Giorno",dayTxt)+row("Orario",state.slot)+row("Totale",tot(ppl))+(state.src?row("Ci hai conosciuto",state.src):"");
   var ok=!!(state.slot&&name);
   $("sendBtn").disabled=!ok;
   $("sendBtn").textContent=ok?"Invia su WhatsApp":(!name?"Inserisci il tuo nome":"Scegli un orario");
-  return "Nome: "+name+"\n\nRichiesta di prenotazione "+(lv.id==="carrozza"?"giro in carrozza":"passeggiata a cavallo")+"\nPersone: "+ppl+(lv.id==="carrozza"?"":"\nLivello: "+lv.name)+"\nDurata: "+fmt(state.dur)+"\nGiorno: "+dayTxt+"\nOrario: "+state.slot+"\nTotale: "+tot(ppl)+"\n\nLink calendario (valido dopo la conferma del maneggio):\n"+confLink(name,ppl);
+  return "Nome: "+name+"\n\nRichiesta di prenotazione "+(lv.id==="carrozza"?"giro in carrozza":"passeggiata a cavallo")+"\nPersone: "+ppl+(lv.id==="carrozza"?"":"\nLivello: "+lv.name)+"\nDurata: "+fmt(state.dur)+"\nGiorno: "+dayTxt+"\nOrario: "+state.slot+"\nTotale: "+tot(ppl)+(state.src?"\nVi ho conosciuto tramite: "+state.src:"")+"\n\nLink calendario (valido dopo la conferma del maneggio):\n"+confLink(name,ppl);
 }
 document.addEventListener("change",function(e){
   var n=e.target.name,v=e.target.value;
@@ -61,6 +63,7 @@ document.addEventListener("change",function(e){
   if(n==="dur"){state.dur=+v;renderSlots()}
   if(n==="day"){state.day=v;renderSlots()}
   if(n==="slot")state.slot=v;
+  if(n==="src")state.src=v;
   summary();
 });
 ["fName","fPeople"].forEach(function(id){$(id).addEventListener("input",summary)});
@@ -73,6 +76,12 @@ $("bookForm").addEventListener("submit",function(e){
   a.href="https://wa.me/"+PHONE+"?text="+encodeURIComponent(summary());a.target="_blank";a.rel="noopener";
   document.body.appendChild(a);a.click();a.remove();
   $("sent").hidden=false;
+});
+// "Come ci hai conosciuto" è facoltativo: un secondo tocco toglie la scelta
+$("srcs").addEventListener("click",function(e){
+  var lab=e.target.closest("label");if(!lab)return;
+  var inp=document.getElementById(lab.htmlFor);
+  if(inp&&inp.checked){e.preventDefault();inp.checked=false;state.src=null;summary();}
 });
 renderStatic();renderSlots();summary();
 })();
