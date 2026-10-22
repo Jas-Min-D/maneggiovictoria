@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Conferma prenotazione · Maneggio Victoria</title>
+<meta name="description" content="Riepilogo della prenotazione e aggiunta al calendario.">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap">
+  <a href="index.html" class="logo" aria-label="Maneggio Victoria Country Club, home"></a>
+  <button class="menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Apri il menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav class="nav" id="nav" aria-label="Menu principale"><a href="esperienze.html">Esperienze</a><a href="eventi.html">Feste ed eventi</a><a href="galleria.html">Galleria</a><a href="contatti.html">Contatti</a><a class="btn" href="prenota.html" aria-current="page">Prenota</a></nav>
+</div></header>
+<main>
+<section class="section"><div class="wrap" style="max-width:720px">
+  <div id="conf-ok" class="conf">
+    <span class="label">Prenotazione confermata</span>
+    <h1>Ci vediamo al maneggio</h1>
+    <dl class="conf-list">
+      <dt>Esperienza</dt><dd id="c-what"></dd>
+      <dt>Quando</dt><dd id="c-when"></dd>
+      <dt>Chi</dt><dd id="c-who"></dd>
+      <dt>Dove</dt><dd>Presso Trulli di Piano Mangieri, Corato (BA) · <a class="link" href="https://maps.app.goo.gl/tzsDVYJ72u7W7R2o7" target="_blank" rel="noopener">Apri in Maps</a></dd>
+    </dl>
+    <p class="muted">Aggiungi l'appuntamento al tuo calendario per ricevere un promemoria.</p>
+    <div class="row">
+      <a class="btn" id="c-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+      <button class="btn plum" id="c-ics" type="button">Apple / Outlook / altri</button>
+    </div>
+    <p class="note">Il file per Apple e Outlook include due promemoria: il giorno prima e due ore prima. Con Google Calendar valgono i promemoria impostati nel tuo calendario.</p>
+  </div>
+  <div id="conf-err" hidden>
+    <span class="label">Link non valido</span>
+    <h1>Non troviamo i dati della prenotazione</h1>
+    <p class="muted">Il link potrebbe essere incompleto. Scrivici su WhatsApp al +39 373 756 08 70.</p>
+  </div>
+</div></section>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <div style="display:grid;gap:14px"><span class="logo" aria-hidden="true"></span><p>Passeggiate a cavallo, lezioni ed eventi in campagna, a Corato (BA).</p></div>
+  <div><h3>Pagine</h3><ul><li><a href="esperienze.html">Esperienze</a></li><li><a href="eventi.html">Feste ed eventi</a></li><li><a href="galleria.html">Galleria</a></li><li><a href="contatti.html">Contatti</a></li><li><a href="prenota.html">Prenota</a></li><li><a href="faq.html">Domande frequenti</a></li></ul></div>
+  <div><h3>Contatti</h3><ul><li>+39 373 756 08 70</li><li><a href="https://www.instagram.com/victoriacountry_club/" target="_blank" rel="noopener">@victoriacountry_club</a></li><li><a href="https://maps.app.goo.gl/tzsDVYJ72u7W7R2o7" target="_blank" rel="noopener">Presso Trulli di Piano Mangieri</a></li></ul></div>
+</div><div class="wrap legal"><span>© Victoria Quarter Horses di Urbano Antonella · P.IVA 08238130721</span><a href="privacy.html">Privacy</a></div></footer>
+<script src="site.js"></script><script src="conferma.js"></script>
+</body>
+</html>

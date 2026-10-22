@@ -1,0 +1,77 @@
+# Configurazione di Pages CMS (https://pagescms.org): pannello per gestire evento e galleria.
+media:
+  - name: eventi
+    label: Locandine eventi
+    input: eventi
+    output: /eventi
+    extensions: [jpg, jpeg, png, webp]
+  - name: foto
+    label: Foto e video della galleria
+    input: foto
+    output: /foto
+    extensions: [jpg, jpeg, png, webp, mp4]
+
+content:
+  - name: evento
+    label: Evento in programma
+    type: file
+    path: evento.json
+    format: json
+    fields:
+      - name: attivo
+        label: Mostra l'evento sul sito
+        type: boolean
+      - name: fino_al
+        label: Visibile fino al (poi sparisce da solo)
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: data
+        label: Data e ora, come vuoi che appaia (es. Sabato 17 ottobre, ore 16:30)
+        type: string
+      - name: testo
+        label: Descrizione breve
+        type: text
+      - name: locandina
+        label: Locandina (formato 4:5, es. 1080 × 1350 px)
+        type: image
+        options:
+          media: eventi
+      - name: messaggio_whatsapp
+        label: Messaggio WhatsApp precompilato per chi vuole partecipare
+        type: text
+
+  - name: galleria
+    label: Galleria
+    type: file
+    path: galleria.json
+    format: json
+    list: true
+    fields:
+      - name: file
+        label: Foto o video
+        type: file
+        required: true
+        options:
+          media: foto
+      - name: alt
+        label: Descrizione (non visibile, serve a Google e ai lettori di schermo)
+        type: string
+      - name: categoria
+        label: Categoria
+        type: select
+        options:
+          values:
+            - name: passeggiate
+              label: Passeggiate
+            - name: struttura
+              label: La struttura
+      - name: poster
+        label: Copertina (solo per i video)
+        type: image
+        options:
+          media: foto

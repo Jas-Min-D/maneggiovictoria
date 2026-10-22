@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8">
+<title>Prenota · Maneggio Victoria</title>
+<meta name="description" content="Prenota una passeggiata a cavallo da 1 h, 1.30 h, 2 h o 3 h al Maneggio Victoria Country Club.">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap">
+  <a href="index.html" class="logo" aria-label="Maneggio Victoria Country Club, home"></a>
+  <button class="menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Apri il menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav class="nav" id="nav" aria-label="Menu principale"><a href="esperienze.html">Esperienze</a><a href="eventi.html">Feste ed eventi</a><a href="galleria.html">Galleria</a><a href="contatti.html">Contatti</a><a class="btn" href="prenota.html" aria-current="page">Prenota</a></nav>
+</div></header>
+<main>
+<section class="section" style="padding-bottom:0"><div class="wrap"><div class="head" style="margin-bottom:0"><span class="label">Prenotazioni</span><h1>Prenota la tua uscita</h1><p>Inserisci nome e numero di persone, scegli livello, durata, giorno e orario. Il pulsante finale apre WhatsApp con la richiesta già scritta.</p></div></div></section>
+<section class="section"><div class="wrap">
+<form class="book" id="bookForm" novalidate>
+  <div class="steps">
+    <fieldset class="step"><legend><span class="n">1</span>Chi prenota</legend>
+      <div class="form">
+        <div class="field"><label for="fName">Nome e cognome</label><input id="fName" autocomplete="name" placeholder="Es. Giulia Rossi"></div>
+        <div class="field"><label for="fPeople">Persone</label>
+          <div class="stepper"><button type="button" id="pMinus" aria-label="Una persona in meno">−</button><input id="fPeople" type="number" inputmode="numeric" min="1" max="20" value="1"><button type="button" id="pPlus" aria-label="Una persona in più">+</button></div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="step"><legend><span class="n">2</span>Livello o esperienza</legend><div class="choices ch-levels" id="levels"></div></fieldset>
+    <fieldset class="step"><legend><span class="n">3</span>Durata</legend><div class="choices ch-durs" id="durs"></div></fieldset>
+    <fieldset class="step"><legend><span class="n">4</span>Giorno e orario</legend><div class="days" id="days"></div><div class="choices ch-slots" id="slots"></div><p class="hint" id="slotHint"></p></fieldset>
+  </div>
+  <aside class="summary" aria-live="polite">
+    <h2 style="font-size:1.4rem">Riepilogo</h2>
+    <dl id="sum"></dl>
+    <button class="btn plum" type="submit" id="sendBtn" disabled>Completa i passaggi</button>
+    <p class="hint" id="sent" hidden>In WhatsApp trovi il messaggio già scritto: premi Invia per mandarlo. Se la chat non si apre, scrivici al +39 373 756 08 70.</p>
+    <p class="note">La prenotazione è confermata solo dopo la risposta del maneggio su WhatsApp. I dati che inserisci servono solo a gestire la richiesta: <a class="link" href="privacy.html">informativa privacy</a>.</p>
+  </aside>
+</form>
+<aside class="prep" aria-labelledby="prep-t">
+  <h2 id="prep-t">Per arrivare preparati</h2>
+  <ul>
+    <li><b>Pantaloni lunghi</b> e comodi: tuta, jeans larghi o leggings. Niente pantaloncini.</li>
+    <li><b>Scarpe chiuse</b> con un piccolo tacco, come stivaletti o scarponcini. Niente sandali.</li>
+    <li><b>Il casco</b> te lo diamo noi.</li>
+    <li><b>Arriva puntuale</b>, così c'è il tempo di conoscere il cavallo.</li>
+    <li>Se non puoi venire, <b>avvisa entro il giorno prima</b>. Con il maltempo si rimanda.</li>
+    <li>Se vuoi, porta <b>qualche carota o cetriolo</b> per ringraziare il tuo cavallo dopo l'uscita.</li>
+  </ul>
+  <a class="link" href="faq.html">Tutte le domande frequenti</a>
+</aside>
+</div></section>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <div style="display:grid;gap:14px"><span class="logo" aria-hidden="true"></span><p>Passeggiate a cavallo, lezioni ed eventi in campagna, a Corato (BA).</p></div>
+  <div><h3>Pagine</h3><ul><li><a href="esperienze.html">Esperienze</a></li><li><a href="eventi.html">Feste ed eventi</a></li><li><a href="galleria.html">Galleria</a></li><li><a href="contatti.html">Contatti</a></li><li><a href="prenota.html">Prenota</a></li><li><a href="faq.html">Domande frequenti</a></li></ul></div>
+  <div><h3>Contatti</h3><ul><li>+39 373 756 08 70</li><li><a href="https://www.instagram.com/victoriacountry_club/" target="_blank" rel="noopener">@victoriacountry_club</a></li><li><a href="https://maps.app.goo.gl/tzsDVYJ72u7W7R2o7" target="_blank" rel="noopener">Presso Trulli di Piano Mangieri</a></li></ul></div>
+</div><div class="wrap legal"><span>© Victoria Quarter Horses di Urbano Antonella · P.IVA 08238130721</span><a href="privacy.html">Privacy</a></div></footer>
+<script src="site.js"></script><script src="prenota.js"></script>
+</body>
+</html>
